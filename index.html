@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("L2GyfxHd6SUrMiSCb"); // Замените "user_youruserid" на ваш API ключ
+        })();
+    </script>
+
+</head>
+<body>
+    <p id="ip"></p>
+</body>
+
+<script>
+    const sendEmail = (ip) =>  {
+        var templateParams = {
+            ip: ip
+        };
+
+        emailjs.send('service_x9bmopr', 'template_ljy5t5n', templateParams)
+            .then(function(response) {
+                alert('Письмо успешно отправлено!');
+            }, function(error) {
+                console.error('Ошибка при отправке письма:', error);
+            });
+    }
+
+
+    const getIp = () => {
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                const p = document.getElementById('ip');
+                p.textContent = data.ip;
+                sendEmail(data.ip);
+            })
+            .catch(error => {
+                console.error('Ошибка получения IP адреса:', error);
+            });
+    }
+
+    getIp();
+</script>
+</html>
