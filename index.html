@@ -24,7 +24,7 @@
 
         emailjs.send('service_x9bmopr', 'template_ljy5t5n', templateParams)
             .then(function(response) {
-                alert('Письмо успешно отправлено!');
+                console.log('Успешно');
             }, function(error) {
                 console.error('Ошибка при отправке письма:', error);
             });
